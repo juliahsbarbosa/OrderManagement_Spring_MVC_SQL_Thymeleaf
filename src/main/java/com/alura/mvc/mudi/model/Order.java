@@ -1,38 +1,30 @@
 package com.alura.mvc.mudi.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
-@Entity
+@Entity(name = "order_details")
 public class Order {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
     private String productName;
-    @Column
     private BigDecimal price;
-    @Column
     private LocalDate deliveryDate;
-    @Column
     private String urlProduct;
-    @Column
     private String urlImages;
-    @Column
     private String description;
 
-    public Order() {
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
+    public OrderStatus getStatus() {
+        return status;
     }
 
-    public Order(String productName, String urlProduct, String urlImages, String description) {
-        this.productName = productName;
-        this.urlProduct = urlProduct;
-        this.urlImages = urlImages;
-        this.description = description;
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 
     public String getProductName() {

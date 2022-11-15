@@ -1,37 +1,42 @@
 package com.alura.mvc.mudi.controller;
 
 import com.alura.mvc.mudi.model.Order;
+import com.alura.mvc.mudi.model.OrderStatus;
+import com.alura.mvc.mudi.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@RequestMapping("/home")
 public class HomeController {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Autowired
+    OrderRepository orderRepository;
 
-    @GetMapping("/home")
+    @GetMapping
     public String home(Model model) {
-
-        Query query = entityManager.createQuery("select o from Order o", Order.class);
-
-//        Order order = new Order();
-//        order.setProductName("XIaomi Redmi Note 8");
-//        order.setUrlImages("https://www.pointekonline.com/wp-content/uploads/2019/10/redmi-note-8-pro.jpg");
-//        order.setUrlProduct("https://www.mi.com/in/redmi-note-8/");
-//        order.setDescription("lorem ipsum");
-//
-        List<Order> orders = query.getResultList();
+        List<Order> orders = orderRepository.findAll();
         model.addAttribute("orders", orders);
-
         return "home";
     }
+    @GetMapping("/{status}")
+    public String processing(@PathVariable("status") String status, Model model) {
+        List<Order> orders = orderRepository.findByStatus(OrderStatus.valueOf(status.toUpperCase()));
+        model.addAttribute("orders", orders);
+        model.addAttribute("status", status);
+        return "home";
+    }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String onError(){
+        return "redirect:/home";
+    }
+
+
 }

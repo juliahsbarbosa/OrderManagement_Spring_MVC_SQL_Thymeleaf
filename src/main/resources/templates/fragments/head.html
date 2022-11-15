@@ -1,0 +1,31 @@
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <title>Homepage</title>
+
+
+  <!--Bootstrap CSS-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+  <!-- Google Fonts - Roboto-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <style>
+    .logo-container {
+      background-color: #47bcff;
+      color: #fff;
+    }
+
+    .logo {
+      font-family: 'Roboto', sans-serif;
+      font-size: 2.5rem;
+    }
+
+  </style>
+</head>
+<div th:fragment="logo" class="logo-container mb-3 p-3 d-flex justify-content-between">
+  <span class="logo">Mudi</span>
+  <span class="mt-2">Login</span>
+</div>

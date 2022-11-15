@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello</title>
+<head th:replace="~{fragments/head :: head}">
 
-    <!--Bootstrap CSS-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-    <div class="card" th:each="order : ${orders}">
-        <div class="card-header" th:text="${order.productName}">Product name</div>
+<div th:replace="~{fragments/head :: logo}">
 
+</div>
+<div class="container">
+    <div th:replace="~{fragments/jumbotron :: pageTitle('My Orders')}">
+
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between mb-3">
+
+
+        <div class="navbar-nav">
+            <a  th:classappend="${status} == null ? 'active'" class="nav-link active" aria-current="page" href="/home">All</a>
+            <a th:classappend="${status} == 'processing' ? 'active'" class="nav-link" href="/home/processing">Processing</a>
+            <a th:classappend="${status} == 'shipped' ? 'active'" class="nav-link" href="/home/shipped">Shipped</a>
+            <a th:classappend="${status} == 'delivered' ? 'active'" class="nav-link" href="/home/delivered" >Delivered</a>
+        </div>
+        <button class="btn btn-outline-secondary" type="submit">New</button>
+    </nav>
+
+    <div class="card mt-3" th:each="order : ${orders}">
+        <th:block th:switch="${order.status.name()}">
+            <div th:case="'PROCESSING'" class="card-header alert-warning" th:text="${order.productName}">Product name</div>
+            <div th:case="'SHIPPED'" class="card-header alert-success" th:text="${order.productName}">Product name</div>
+            <div th:case="'DELIVERED'" class="card-header alert-dark" th:text="${order.productName}">Product name</div>
+        </th:block>
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-sm-8 mb-3">
                     <div class="row">
-                        <div class="col-md-5">Price: <span th:text="${order.price}">200.99</span></div>
-                        <div class="col-md-7">Delivery date: <span th:text="${order.deliveryDate}">10/02/2020</span>
+                        <div class="col-md-5">Price: <span th:text="${#numbers.formatCurrency(order.price)}">200.99</span></div>
+                        <div class="col-md-7">Delivery date: <span th:text="${#temporals.format(order.deliveryDate, 'dd/MM/yyyy')}">10/02/2020</span>
                         </div>
                     </div>
 
@@ -27,7 +44,7 @@
 
                     <div>Description</div>
                     <div>
-                        <textarea class="form-control" th:value="${order.description}">product description</textarea>
+                        <textarea class="form-control" th:text="${order.description}"></textarea>
                     </div>
                 </div>
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head th:replace="~{fragments/head :: head}">
+
+</head>
+<body>
+<div th:replace="~{fragments/head :: logo}">
+
+</div>
+<div class="container">
+    <div th:replace="~{fragments/jumbotron :: pageTitle('New Order')}">
+    </div>
+
+    <div class="card mt-3">
+        <form th:object="${newOrder}" class="card-body" action="/order/new" method="POST">
+
+            <div class="form-group">
+                <label for="productName">Product:</label>
+                <input th:field="*{productName}" th:errorclass="is-invalid" class="form-control" id="productName" placeholder="product name"/>
+                <div class="invalid-feedback" th:errors="*{productName}">
+                    Errors
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="urlProduct">Url</label>
+                <input th:field="*{urlProduct}" th:errorclass="is-invalid" class="form-control" id="urlProduct" placeholder="product's URL"/>
+                <div class="invalid-feedback" th:errors="*{urlProduct}">
+                    Errors
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="urlImages">Imagem</label>
+                <input th:field="*{urlImages}" th:errorclass="is-invalid" class="form-control" id="urlImages" placeholder="product's images URL"/>
+                <div class="invalid-feedback" th:errors="*{urlImages}">
+                    Errors
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descrição</label>
+                <textarea  th:field="*{description}" th:errorclass="is-invalid" class="form-control" id="description" name="description"
+                          placeholder="Add additional details"></textarea>
+            </div>
+            <div class="invalid-feedback" th:errors="*{description}">
+                Errors
+            </div>
+            <button type="submit" class="btn btn-secondary mt-3">Add new product</button>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
