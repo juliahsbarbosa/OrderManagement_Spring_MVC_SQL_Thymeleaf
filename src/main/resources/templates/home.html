@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
-<head th:replace="~{fragments/head :: head}">
+<html lang="en" xmlns:th="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="~{fragments/fragments :: header}">
 
 </head>
 <body>
-<div th:replace="~{fragments/head :: logo}">
+<div th:replace="~{fragments/fragments :: logo}">
 
 </div>
 <div class="container">
-    <div th:replace="~{fragments/jumbotron :: pageTitle('My Orders')}">
+    <div th:replace="~{fragments/fragments :: jumbotron('My Orders')}">
 
     </div>
 
@@ -21,7 +21,7 @@
             <a th:classappend="${status} == 'shipped' ? 'active'" class="nav-link" href="/home/shipped">Shipped</a>
             <a th:classappend="${status} == 'delivered' ? 'active'" class="nav-link" href="/home/delivered" >Delivered</a>
         </div>
-        <button class="btn btn-outline-secondary" type="submit">New</button>
+        <a href="/order/form"><button class="btn btn-outline-secondary" type="submit">New</button></a>
     </nav>
 
     <div class="card mt-3" th:each="order : ${orders}">

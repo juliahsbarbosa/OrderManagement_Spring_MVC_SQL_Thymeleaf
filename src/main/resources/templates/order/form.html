@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head th:replace="~{fragments/head :: head}">
+<head th:replace="~{fragments/fragments :: head}">
 
 </head>
 <body>
-<div th:replace="~{fragments/head :: logo}">
+<div th:replace="~{fragments/fragments :: logo}">
 
 </div>
 <div class="container">
-    <div th:replace="~{fragments/jumbotron :: pageTitle('New Order')}">
+    <div th:replace="~{fragments/fragments :: jumbotron('New Order')}">
     </div>
 
     <div class="card mt-3">

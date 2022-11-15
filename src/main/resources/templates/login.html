@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="~{fragments/fragments :: header}">
+
+</head>
+<body>
+<div th:replace="~{fragments/fragments :: logo}">
+</div>
+<main class="login-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Login</div>
+                    <div class="card-body">
+                        <form th:action="@{/login}" method="post">
+
+                            <!-- Username input -->
+                            <div class="form-group mb-4">
+                                <label class="form-label" for="username">Username</label>
+                                <input id="username" name="username" class="form-control" placeholder="username"/>
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-group mb-4">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" id="password" name="password" class="form-control"
+                                       placeholder="password"/>
+                            </div>
+
+                            <!-- 2 column grid layout for inline styling -->
+                            <div class="row mb-4">
+                                <div class="col d-flex justify-content-center">
+
+                                    <!-- Checkbox -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="form2Example31"
+                                               checked/>
+                                        <label class="form-check-label" for="form2Example31"> Remember me </label>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <!-- Simple link -->
+                                    <a href="#!">Forgot password?</a>
+                                </div>
+
+                            </div><!--row grid-->
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block mb-4">Login</button>
+
+                            <!-- Register buttons -->
+                            <div class="text-center">
+                                <p>Not a member? <a href="#!">Register</a></p>
+                            </div>
+
+                        </form>
+                    </div><!--card body-->
+                </div><!--card-->
+            </div><!--col-->
+        </div><!--row-->
+    </div><!--container-->
+
+</main>
+
+</body>
+</html>
